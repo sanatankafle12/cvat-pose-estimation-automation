@@ -10,7 +10,7 @@
 # # Initialize your model
 # def init_context(context):
 #     context.logger.info('Initializing YOLOv8 pose estimation model...  0%')
-#     model = YOLO('fish_pose_v5k14.pt')  # Load the YOLOv8 pose estimation model (adjust model path as necessary)
+#     model = YOLO('')  # Load the YOLOv8 pose estimation model (adjust model path as necessary)
 #     context.user_data.model_handler = model
 #     context.logger.info('YOLOv8 pose estimation model initialized...100%')
 # # Inference endpoint
@@ -152,7 +152,7 @@ from ultralytics import YOLO
 # Initialize your model
 def init_context(context):
     context.logger.info('Initializing YOLOv8 pose estimation model...  0%')
-    model = YOLO('fish_pose_v6k14.pt')  # Load the YOLOv8 pose estimation model (adjust model path as necessary)
+    model = YOLO('YOUR-MODEL-NAME')  # Load the YOLOv8 pose estimation model (adjust model path as necessary)
     context.user_data.model_handler = model
     context.logger.info('YOLOv8 pose estimation model initialized...100%')
 
