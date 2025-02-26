@@ -1,0 +1,69 @@
+metadata:
+  name: custom-model-yolov8-pose
+  namespace: cvat
+  annotations:
+    name: custom-model-yolov8-pose
+    type: detector  # Updated type to indicate this is for pose estimation
+    # Spec is optional for pose estimation models. If needed, it could define keypoints
+    # The number of keyppints are defined in sublabels and in svg as many number of circles as you have
+    spec: |
+      [
+        {
+          "name": "fish",
+          "type": "skeleton",
+          "svg": "<circle r=\"0.75\" cx=\"58.28781509399414\" cy=\"16.37605094909668\" data-type=\"element node\" data-element-id=\"1\" data-node-id=\"1\" data-label-name=\"1\"></circle>\n<circle r=\"0.75\" cx=\"12.48109436035156\" cy=\"46.796218872070312\" data-type=\"element node\" data-element-id=\"2\" data-node-id=\"2\" data-label-name=\"2\"></circle>\n<circle r=\"0.75\" cx=\"28.20378112792969\" cy=\"84.27520751953125\" data-type=\"element node\" data-element-id=\"3\" data-node-id=\"3\" data-label-name=\"3\"></circle>\n<circle r=\"0.75\" cx=\"41.313026428222656\" cy=\"16.71218490600586\" data-type=\"element node\" data-element-id=\"4\" data-node-id=\"4\" data-label-name=\"4\"></circle>\n<circle r=\"0.75\" cx=\"60.28781509399414\" cy=\"60.37605094909668\" data-type=\"element node\" data-element-id=\"5\" data-node-id=\"5\" data-label-name=\"5\"></circle>\n<circle r=\"0.75\" cx=\"72.48109436035156\" cy=\"45.796218872070312\" data-type=\"element node\" data-element-id=\"6\" data-node-id=\"6\" data-label-name=\"6\"></circle>\n<circle r=\"0.75\" cx=\"65.20378112792969\" cy=\"70.27520751953125\" data-type=\"element node\" data-element-id=\"7\" data-node-id=\"7\" data-label-name=\"7\"></circle>\n<circle r=\"0.75\" cx=\"50.313026428222656\" cy=\"36.71218490600586\" data-type=\"element node\" data-element-id=\"8\" data-node-id=\"8\" data-label-name=\"8\"></circle>\n<circle r=\"0.75\" cx=\"20.28781509399414\" cy=\"30.37605094909668\" data-type=\"element node\" data-element-id=\"9\" data-node-id=\"9\" data-label-name=\"9\"></circle>\n<circle r=\"0.75\" cx=\"80.48109436035156\" cy=\"50.796218872070312\" data-type=\"element node\" data-element-id=\"10\" data-node-id=\"10\" data-label-name=\"10\"></circle>\n<circle r=\"0.75\" cx=\"55.20378112792969\" cy=\"90.27520751953125\" data-type=\"element node\" data-element-id=\"11\" data-node-id=\"11\" data-label-name=\"11\"></circle>\n<circle r=\"0.75\" cx=\"45.313026428222656\" cy=\"20.71218490600586\" data-type=\"element node\" data-element-id=\"12\" data-node-id=\"12\" data-label-name=\"12\"></circle>\n<circle r=\"0.75\" cx=\"30.28781509399414\" cy=\"40.37605094909668\" data-type=\"element node\" data-element-id=\"13\" data-node-id=\"13\" data-label-name=\"13\"></circle>\n<circle r=\"0.75\" cx=\"70.48109436035156\" cy=\"55.796218872070312\" data-type=\"element node\" data-element-id=\"14\" data-node-id=\"14\" data-label-name=\"14\"></circle>",
+          "sublabels": [
+              { "id": 0, "name": "1", "type": "points" },
+              { "id": 1, "name": "2", "type": "points" },
+              { "id": 2, "name": "3", "type": "points" },
+              { "id": 3, "name": "4", "type": "points" },
+              { "id": 4, "name": "5", "type": "points" },
+              { "id": 5, "name": "6", "type": "points" },
+              { "id": 6, "name": "7", "type": "points" },
+              { "id": 7, "name": "8", "type": "points" },
+              { "id": 8, "name": "9", "type": "points" },
+              { "id": 9, "name": "10", "type": "points" },
+              { "id": 10, "name": "11", "type": "points" },
+              { "id": 11, "name": "12", "type": "points" },
+              { "id": 12, "name": "13", "type": "points" },
+              { "id": 13, "name": "14", "type": "points" }
+          ]
+        }
+      ]
+
+spec:
+  description: custom-model-yolov8-pose
+  runtime: 'python:3.9'
+  handler: main:handler
+  eventTimeout: 120s
+
+  build:
+      image: custom-model-yolov8-pose
+      baseImage: ultralytics/ultralytics:latest-cpu
+      directives:
+        preCopy:
+          - kind: USER
+            value: root
+          # - kind: RUN
+          #   value: apt update && apt install --no-install-recommends -y libglib2.0-0
+          # - kind: RUN
+          #   value: pip install ultralytics
+          - kind: WORKDIR
+            value: /opt/nuclio
+
+  triggers:
+    myHttpTrigger:
+      maxWorkers: 2
+      kind: 'http'
+      workerAvailabilityTimeoutMilliseconds: 10000
+      attributes:
+        maxRequestBodySize: 33554432
+
+  platform:
+    attributes:
+      restartPolicy:
+        name: always
+        maximumRetryCount: 3
+      mountMode: volume
+
+
