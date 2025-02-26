@@ -2,11 +2,12 @@
 
 ## Custom CVAT with Pose Estimation
 
-This repository is a modified version of the  [CVAT](https://github.com/cvat-ai/cvat) , adapted to run a custom pose estimation model.
+This repository needs to be used in conjunction with [CVAT](https://github.com/cvat-ai/cvat) , adapted to run a custom pose estimation model.
 Modifications
 
 This version includes:
-    A custom pose estimation model integrated for specific annotation tasks.
+    A custom pose estimation model integrated for specific annotation tasks. You'll need to clone the CVAT repo and this repo. In the CVAT repo, you'll see a serverless folder just like in this. Just add this repo's directory to the corresponding directory in CVAT.
+
 
 ## License
 
