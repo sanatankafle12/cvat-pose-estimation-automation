@@ -120,4 +120,4 @@ which will prompt you to authenticate yourself that you add when creating the su
 2. In labels, you can add ```from model``` which will give you option to chose from your model and can pick from there
 3. Create a new task under the project name
 4. Select the AI button in the navigation inside the job
-5. use your model, annotate and export it as you require.
+5. use your model, annotate and export it as you required.
