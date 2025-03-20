@@ -93,7 +93,7 @@ CVAT with Serverless Machine Learning Models
 
 ### **7. Deploy the YOLOv8 Keypoints Model Function**
 
-    sudo nuctl deploy --project-name cvat \--path serverless/pytorch/ultralytics/yolov8-fish-kp/nuclio \--volume `pwd`/serverless/common:/opt/nuclio/common \--platform local
+    sudo nuctl deploy --project-name cvat \--path serverless/pytorch/ultralytics/<folder>/nuclio \--volume `pwd`/serverless/common:/opt/nuclio/common \--platform local
 
 
 *Purpose*: Deploys the YOLOv8 keypoints detection function as a serverless component under the cvat project.
@@ -109,7 +109,7 @@ CVAT with Serverless Machine Learning Models
 
 ## Deploying and Checking Model:
 
-At Step 7, we run our desired model which is kept at serverless/pytorch/ultralytics/yolov8-fish-kp folder. After deploying the model run 
+At Step 7, we run our desired model which is kept at serverless/pytorch/ultralytics/<folder> folder. After deploying the model run 
 
     localhost:8080
 which will prompt you to authenticate yourself that you add when creating the superuser
